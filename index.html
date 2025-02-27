@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Wahyu Galang</title>
+    <link rel="stylesheet" href="asset/css/main.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar-container">
+        <div class="name">
+            <h1>Wahyu Galang</h1>
+        </div>
+        <!-- <div class="burger-menu" onclick="toggleMenu()">☰</div> -->
+        <nav class="nav-list">
+            <ul>
+                <li><a href="#home" id="berandaBtn">Beranda</a></li>
+                <li><a href="#about" id="aboutMeBtn">About Me</a></li>
+                <li><a href="#skills" id="skillsBtn">Skills</a></li>
+                <li><a href="#service" id="serviceBtn">Services</a></li>
+                <li><a href="#portfolio" id="portoBtn">Portofolio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section class="content home" id="home">
+            <article class="home-text">
+                <h1>Temukan Peluang Karier Terbaik<span>untuk Masa Depanmu!</span></h1>
+                <h2 class="text-animated">We Looking For<span class="typing"></span></h2>
+                <p>Jelajahi berbagai lowongan pekerjaan dari perusahaan terpercaya dan raih kesempatan untuk berkembang. Temukan karier impianmu bersama kami!</p>
+                <div class="button-hire">
+                    <button>Hire Now</button>
+                    <button>Contact Me</button>
+                </div>
+            </article>
+            <aside class="home-img">
+                <img src="asset/img/quality_restoration_20241021131901095.jpg" alt="Foto Diri">
+            </aside>
+        </section>
+
+        <!-- About Me -->
+        <section class="content-about" id="about">
+            <div class="about-container">
+                <article class="about-text">
+                    <h1>About Me</h1>
+                    <p>Hi, I'm Wahyu Galang Ramadhan Rumampuk - a passionate and creative web developer with a love for crafting engaging and functional digital experiences. From designing sleek user interfaces to building responsive and dynamic websites, I'm driven by the desire to turn ideas into reality.</p>
+                    <div class="dropdown-section">
+                        <button class="dropdown-btn" onclick="toggleDropdown()">Select Section</button>
+                        <ul class="dropdown-content" id="dropdownContent">
+                            <li onclick="showContent('education')">Education</li>
+                            <li onclick="showContent('experience')">Experience</li>
+                            <li onclick="showContent('achievements')">Achievements</li>
+                        </ul>
+                    </div>
+                </article>
+                <div class="about-details">
+                    <article class="details-section" id="education">
+                        <h2>Education</h2>
+                        <p>Politeknik Negeri Banyuwangi - Informatics Engineering, Software Engineering Technology
+                            Currently pursuing my degree, diving deep into software development, system design, and innovative tech solutions</p>
+                        <p>SMA Negeri 1 Glagah - Science Major
+                            Graduated with a strong foundation in analytical thinking and problem-solving, which sparked my interest in technology and web development.</p>
+                    </article>
+                    <article class="details-section hidden" id="experience">
+                        <h2>Experience</h2>
+                        <p>
+                            Fullstack Developer - 2 years
+                            Developed end-to-end web applications, focusing on both front-end and back-end development. Built dynamic, user-friendly websites while ensuring optimal performance and scalability.</p>
+                        <p>
+                            Front-End Developer - 1 year
+                            Specialized in creating interactive, responsive, and visually appealing user interfaces using modern web technologies.
+                        </p>   
+                        <p>
+                            Project Leader - Final Semester Project
+                            Led a team of developers to successfully complete the final semester project, ensuring collaboration, meeting deadlines, and delivering a polished result.
+                        </p>
+                        <p>
+                            Web Design - 3 years
+                            Experienced in creating website layouts and designs that focus on user experience and aesthetic appeal.
+                        </p>
+                    </article>
+                    <article class="details-section hidden" id="achievements">
+                        <h2>Achievements</h2>
+                        <p>
+                            Junior Web Developer Certification - Kominfo
+                            Completed a comprehensive certification program in web development, gaining skills in both front-end and back-end development.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>        
+
+        <!-- Skills -->
+        <section class="content-skill" id="skills">
+            <div class="skills-container">
+                <div class="slider-section">
+                    <div class="slider" id="slider">
+                        <aside class="slide" data-text="HTML">
+                            <img src="asset/img/html5-icon-13.jpg" alt="HTML">
+                        </aside>
+                        <aside class="slide" data-text="CSS">
+                            <img src="asset/img/csslogo.png" alt="CSS">
+                        </aside>
+                        <aside class="slide" data-text="JavaScript">
+                            <img src="asset/img/javascript-logo-javascript-icon-transparent-free.png" alt="JavaScript">
+                        </aside>
+                        <aside class="slide" data-text="Python">
+                            <img src="asset/img/python-logo.png" alt="Python">
+                        </aside>
+                        <aside class="slide" data-text="Bootstrap">
+                            <img src="asset/img/R.png" alt="Bootstrap">
+                        </aside>
+                        <aside class="slide" data-text="Tailwind">
+                            <img src="asset/img/tailwind-css.png" alt="Tailwind">
+                        </aside>
+                        <aside class="slide" data-text="PHP">
+                            <img src="asset/img/php_PNG35.png" alt="PHP">
+                        </aside>
+                    </div>
+                    <div class="slider-nav">
+                        <button onclick="prevSlide()">&#10094; Prev</button>
+                        <button onclick="nextSlide()">Next &#10095;</button>
+                    </div>
+                </div>
+                <article class="skills-text">
+                    <h1>My Skills <span id="skiil-name"></span></h1>
+                    <p id="skill-description">Here are some of the programming languages and tools I am proficient in. I am continuously learning and expanding my skill set to build better projects and solutions.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="content-services" id="service">
+            <div class="service-container">
+                <h1>Services</h1>
+                <article class="services-grid">
+                    <div class="service-box">
+                        <h2>Web Development</h2>
+                        <p>Creating modern and responsive websites tailored to your needs.</p>
+                    </div>
+                    <div class="service-box">
+                        <h2>UI/UX Design</h2>
+                        <p>Designing user-friendly interfaces with a focus on excellent user experiences.</p>
+                    </div>
+                    <div class="service-box">
+                        <h2>Mobile App Development</h2>
+                        <p>Developing intuitive and engaging mobile applications.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Portofolio -->
+        <section class="content-portfolio" id="portfolio">
+            <div class="portfolio-container">
+                <h1>My Portfolio</h1>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="asset/img/Dashboard sebelum login.png" alt="Project 1">
+                        <h2>Project 1</h2>
+                        <p>Design Web Freelance and Job.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="asset/img/Screenshot 2025-01-11 141143.png" alt="Project 2">
+                        <h2>Project 2</h2>
+                        <p>A modern portfolio site using HTML, CSS, and JavaScript.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="asset/img/Screenshot 2025-01-11 141534.png" alt="Project 5">
+                        <h2>Project 3</h2>
+                        <p>A data visualization with python and data analyst.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="asset/img/Desktop - 1.png" alt="Project 4">
+                        <h2>Project 4</h2>
+                        <p>Web design for any website and mobile app.</p>
+                    </div>
+                </div>
+            </div>
+        </section>        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-container">
+        <div class="footer-content">
+            <div class="footer-section contact-info">
+                <h2>Contact Me</h2>
+                <p><i class="fa-solid fa-envelope"></i> Email: wahyugalang777@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> Phone: +62 823-3405-2858</p>
+                <p><i class="fa-solid fa-location-dot"></i> Banyuwangi, Indonesia</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Wahyu Galang. All rights reserved.</p>
+        </div>
+    </footer>    
+
+    <script src="asset/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/a0e92a2da7.js" crossorigin="anonymous"></script>
+</body>
+</html>
