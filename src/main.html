@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wahyu Galang Ramadhan Rumampuk — Code Athlete · Full Stack & ML Engineer</title>
+<meta name="description" content="Forge Studio — Personal portfolio of Wahyu Galang Ramadhan Rumampuk. Full Stack Developer & Machine Learning Engineer. Building scalable web applications and intelligent AI solutions." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --void:#050505;
+    --carbon:#0c0c0c;
+    --ash:#141414;
+    --ash-2:#1a1a1a;
+    --steel:#262626;
+    --steel-2:#333;
+    --silver:#b8b8b8;
+    --chrome:#ececec;
+    --ember:#ff5a00;
+    --ember-bright:#ff7a2a;
+    --ember-deep:#cc4400;
+    --ember-glow:rgba(255,90,0,0.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--void);
+    color:var(--chrome);
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    cursor:none;
+  }
+  /* Custom cursor */
+  .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;}
+  .cursor-dot{width:6px;height:6px;background:var(--ember);transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
+  .cursor-ring{width:36px;height:36px;border:1px solid rgba(255,255,255,.4);transform:translate(-50%,-50%);transition:transform .25s cubic-bezier(.2,.9,.3,1),width .25s,height .25s,border-color .25s,background .25s;}
+  .cursor-ring.hover{width:64px;height:64px;border-color:var(--ember);background:rgba(255,90,0,.06);}
+  @media (max-width:768px){body{cursor:auto}.cursor-dot,.cursor-ring{display:none}}
+
+  /* Fonts */
+  .font-display{font-family:'Bebas Neue',sans-serif;letter-spacing:.01em}
+  .font-head{font-family:'Oswald',sans-serif}
+  .font-body{font-family:'Barlow Condensed',sans-serif}
+  .font-mono{font-family:'JetBrains Mono',monospace}
+
+  /* Grain overlay with parallax */
+  .grain-overlay{
+    position:fixed;
+    inset:-10%;
+    pointer-events:none;
+    z-index:2;
+    opacity:.09;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    will-change:transform;
+  }
+
+  /* Hero canvas */
+  #heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+
+  /* Display text */
+  .display-mega{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,13vw,11rem);line-height:.84;letter-spacing:-.01em;}
+  .display-xl{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,5.5rem);line-height:.9;}
+
+  .ember-text{color:var(--ember);text-shadow:0 0 30px rgba(255,90,0,.35);}
+  .silver-text{color:var(--silver);}
+
+  /* CTA pulse */
+  @keyframes pulse-ember{
+    0%,100%{box-shadow:0 0 0 0 var(--ember-glow),0 0 20px rgba(255,90,0,.3);}
+    50%{box-shadow:0 0 0 14px rgba(255,90,0,0),0 0 30px rgba(255,90,0,.5);}
+  }
+  .pulse-cta{animation:pulse-ember 2.4s ease-out infinite;}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal-stagger.in > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger.in > *:nth-child(1){transition-delay:.04s}
+  .reveal-stagger.in > *:nth-child(2){transition-delay:.12s}
+  .reveal-stagger.in > *:nth-child(3){transition-delay:.2s}
+  .reveal-stagger.in > *:nth-child(4){transition-delay:.28s}
+  .reveal-stagger.in > *:nth-child(5){transition-delay:.36s}
+  .reveal-stagger.in > *:nth-child(6){transition-delay:.44s}
+  .reveal-stagger.in > *:nth-child(7){transition-delay:.52s}
+  .reveal-stagger.in > *:nth-child(8){transition-delay:.6s}
+
+  /* Flip card */
+  .flip-card{perspective:1400px;}
+  .flip-inner{position:relative;width:100%;height:100%;transition:transform .85s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+  .flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+  .flip-back{transform:rotateY(180deg);}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-track{background:var(--carbon)}
+  ::-webkit-scrollbar-thumb{background:var(--ember-deep);border-radius:4px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--ember)}
+  ::selection{background:var(--ember);color:var(--void);}
+
+  /* Marquee */
+  @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .marquee-track{animation:marquee 38s linear infinite;display:flex;width:max-content;}
+
+  /* Skill bar */
+  .skill-bar{height:3px;background:var(--steel);position:relative;overflow:hidden;}
+  .skill-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--ember-deep),var(--ember));width:0;transition:width 1.4s cubic-bezier(.2,.7,.2,1);}
+
+  /* Sticky bottom bar */
+  .sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:50;transform:translateY(120%);transition:transform .55s cubic-bezier(.2,.8,.2,1);}
+  .sticky-bar.show{transform:translateY(0);}
+
+  /* Carousel */
+  .carousel-track{cursor:grab;will-change:transform;}
+  .carousel-track.dragging{cursor:grabbing;}
+  .carousel-track.snap{transition:transform .55s cubic-bezier(.2,.7,.2,1);}
+
+  /* Cards */
+  .glow-card{position:relative;background:var(--ash);border:1px solid var(--steel);transition:border-color .35s,transform .35s,box-shadow .35s;}
+  .glow-card:hover{border-color:var(--ember);box-shadow:0 0 30px rgba(255,90,0,.12),inset 0 0 20px rgba(255,90,0,.04);}
+
+  /* Image treatment */
+  .img-mono img{filter:grayscale(100%) contrast(1.15) brightness(.78);}
+  .img-mono:hover img{filter:grayscale(100%) contrast(1.25) brightness(.95);}
+
+  /* Num tag */
+  .num-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ember);letter-spacing:.18em;text-transform:uppercase;}
+
+  /* Audio bars */
+  @keyframes barHeights{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+  .audio-bar{width:3px;background:var(--ember);transform-origin:bottom;animation:barHeights .9s ease-in-out infinite;}
+
+  /* Glass */
+  .glass{background:rgba(14,14,14,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06);}
+  .glass-strong{background:rgba(8,8,8,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,90,0,.18);}
+
+  /* No scrollbar */
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+
+  /* Underline link */
+  .ulink{position:relative;display:inline-block;}
+  .ulink::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:1px;background:var(--ember);transform:scaleX(0);transform-origin:right;transition:transform .4s cubic-bezier(.2,.7,.2,1);}
+  .ulink:hover::after{transform:scaleX(1);transform-origin:left;}
+
+  /* Pipeline */
+  .pipeline-line{
+    background:linear-gradient(90deg,transparent 0%,var(--ember) 20%,var(--ember) 80%,transparent 100%);
+    height:1px;
+  }
+
+  /* Mobile menu */
+  .mobile-menu{transform:translateX(100%);transition:transform .5s cubic-bezier(.2,.7,.2,1);}
+  .mobile-menu.open{transform:translateX(0);}
+
+  /* Form */
+  .form-input{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--steel);
+    color:var(--chrome);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:1.05rem;
+    padding:.85rem 0;
+    width:100%;
+    transition:border-color .3s;
+    outline:none;
+  }
+  .form-input:focus{border-color:var(--ember);}
+  .form-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;color:var(--silver);text-transform:uppercase;}
+
+  /* Diagonal stripe */
+  .stripe-bg{
+    background-image:repeating-linear-gradient(45deg,transparent 0,transparent 6px,rgba(255,90,0,.04) 6px,rgba(255,90,0,.04) 7px);
+  }
+
+  /* Big number outline */
+  .outline-num{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(8rem,20vw,18rem);
+    line-height:.8;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,.08);
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- Custom cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Grain overlay -->
+<div class="grain-overlay" id="grain"></div>
+
+<!-- ===== NAV ===== -->
+<header class="fixed top-0 left-0 right-0 z-40 px-6 md:px-10 py-5 flex items-center justify-between glass">
+  <a href="#hero" class="flex items-center gap-3 group" data-hover>
+    <div class="w-9 h-9 border border-[var(--ember)] flex items-center justify-center relative">
+      <span class="font-display text-[var(--ember)] text-xl leading-none">W</span>
+      <span class="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[var(--ember)] rounded-full"></span>
+    </div>
+    <div class="leading-tight">
+      <div class="font-display text-lg tracking-wider">FORGE<span class="text-[var(--ember)]">//</span>WGR</div>
+      <div class="font-mono text-[10px] text-[var(--silver)] tracking-widest">CODE ATHLETE STUDIO</div>
+    </div>
+  </a>
+  <nav class="hidden lg:flex items-center gap-8 font-head text-sm uppercase tracking-widest font-medium">
+    <a href="#about" class="ulink text-[var(--silver)] hover:text-white transition" data-hover>Manifesto</a>
+    <a href="#curriculum" class="ulink text-[var(--silver)] hover:text-white transition" data-hover>Curriculum</a>
+    <a href="#coaches" class="ulink text-[var(--silver)] hover:text-white transition" data-hover>Experience</a>
+    <a href="#stories" class="ulink text-[var(--silver)] hover:text-white transition" data-hover>Projects</a>
+    <a href="#stack" class="ulink text-[var(--silver)] hover:text-white transition" data-hover>Stack</a>
+    <a href="#contact" class="ulink text-[var(--silver)] hover:text-white transition" data-hover>Contact</a>
+  </nav>
+  <div class="flex items-center gap-3">
+    <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" class="hidden md:flex items-center gap-2 px-4 py-2 border border-[var(--steel)] hover:border-[var(--ember)] transition font-head text-xs uppercase tracking-widest" data-hover>
+      <i class="fa-brands fa-github"></i><span>GitHub</span>
+    </a>
+    <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[var(--ember)] text-black font-head text-xs uppercase tracking-widest font-semibold hover:bg-[var(--ember-bright)] transition" data-hover>
+      Start Program
+    </a>
+    <button id="menuBtn" class="lg:hidden w-10 h-10 flex items-center justify-center border border-[var(--steel)]" aria-label="Open menu">
+      <i class="fa-solid fa-bars text-[var(--chrome)]"></i>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobileMenu" class="mobile-menu fixed inset-0 z-30 bg-[var(--void)] flex flex-col items-center justify-center gap-8 lg:hidden">
+  <button id="menuClose" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center border border-[var(--steel)]" aria-label="Close menu">
+    <i class="fa-solid fa-xmark text-xl"></i>
+  </button>
+  <a href="#about" class="mobile-link font-display text-4xl tracking-wider hover:text-[var(--ember)]">Manifesto</a>
+  <a href="#curriculum" class="mobile-link font-display text-4xl tracking-wider hover:text-[var(--ember)]">Curriculum</a>
+  <a href="#coaches" class="mobile-link font-display text-4xl tracking-wider hover:text-[var(--ember)]">Experience</a>
+  <a href="#stories" class="mobile-link font-display text-4xl tracking-wider hover:text-[var(--ember)]">Projects</a>
+  <a href="#stack" class="mobile-link font-display text-4xl tracking-wider hover:text-[var(--ember)]">Stack</a>
+  <a href="#contact" class="mobile-link font-display text-4xl tracking-wider text-[var(--ember)]">Contact</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="relative min-h-screen flex flex-col justify-end overflow-hidden pb-12 md:pb-16 pt-32">
+  <canvas id="heroCanvas"></canvas>
+
+  <!-- Background image overlay (high-contrast B&W athletic) -->
+  <div class="absolute inset-0 z-[1] img-mono opacity-30">
+    <img src="https://picsum.photos/seed/forge-athlete-dark/1920/1080?grayscale" alt="" class="w-full h-full object-cover" />
+  </div>
+  <div class="absolute inset-0 z-[2] bg-gradient-to-b from-[var(--void)] via-transparent to-[var(--void)]"></div>
+  <div class="absolute inset-0 z-[2] bg-gradient-to-r from-[var(--void)] via-transparent to-transparent opacity-80"></div>
+
+  <!-- Top corner: reel status -->
+  <div class="absolute top-24 md:top-28 right-6 md:right-10 z-10 flex items-center gap-3">
+    <button id="unmuteBtn" class="group flex items-center gap-2 px-3 py-2 border border-[var(--steel)] hover:border-[var(--ember)] transition glass" aria-label="Toggle audio">
+      <span id="muteIcon" class="flex items-center gap-1">
+        <i class="fa-solid fa-volume-xmark text-[var(--silver)] text-sm"></i>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)]">Muted</span>
+      </span>
+      <span id="unmuteIcon" class="hidden items-center gap-1">
+        <i class="fa-solid fa-volume-high text-[var(--ember)] text-sm"></i>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--ember)]">Live</span>
+      </span>
+    </button>
+    <div class="hidden md:flex items-center gap-2 px-3 py-2 border border-[var(--steel)] glass">
+      <span class="w-1.5 h-1.5 bg-[var(--ember)] rounded-full animate-pulse"></span>
+      <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)]">Reel · 04:32</span>
+    </div>
+  </div>
+
+  <!-- Hero content -->
+  <div class="relative z-10 px-6 md:px-10 max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-4 mb-6">
+      <span class="num-tag">[ 01 / The Forge ]</span>
+      <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+      <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)] hidden md:inline">EST. 2018 · JAKARTA · REMOTE</span>
+    </div>
+
+    <h1 class="display-mega font-bold">
+      <span class="block">WAHYU</span>
+      <span class="block">GALANG <span class="ember-text">R.</span></span>
+      <span class="block silver-text text-[0.55em] font-head font-light tracking-wide">RAMADHAN RUMAMPUK</span>
+    </h1>
+
+    <div class="mt-8 grid md:grid-cols-12 gap-6 items-end">
+      <div class="md:col-span-7">
+        <p class="font-head text-lg md:text-xl text-[var(--chrome)] uppercase tracking-wider">
+          Full Stack Developer <span class="text-[var(--ember)]">·</span> Machine Learning Engineer
+        </p>
+        <p class="mt-3 text-lg md:text-xl text-[var(--silver)] max-w-2xl leading-snug">
+          Building scalable web applications and intelligent AI solutions with modern technologies. Eight years in the arena — from raw HTTP handlers to distributed ML pipelines.
+        </p>
+      </div>
+      <div class="md:col-span-5 flex flex-wrap gap-3 md:justify-end">
+        <a href="#stories" data-hover class="group inline-flex items-center gap-3 px-6 py-4 bg-[var(--ember)] text-black font-head font-semibold text-sm uppercase tracking-widest hover:bg-[var(--ember-bright)] transition">
+          <span>View Projects</span>
+          <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+        </a>
+        <a href="#contact" data-hover class="group inline-flex items-center gap-3 px-6 py-4 border border-[var(--steel)] hover:border-[var(--ember)] text-white font-head font-semibold text-sm uppercase tracking-widest transition">
+          <span>Contact Me</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </a>
+        <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="inline-flex items-center justify-center w-[58px] h-[58px] border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] transition" aria-label="GitHub">
+          <i class="fa-brands fa-github text-lg"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Coach team strip (bottom) -->
+    <div class="mt-12 border-t border-[var(--steel)] pt-6 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+      <div class="md:col-span-1">
+        <div class="num-tag mb-1">[ Coach Roster ]</div>
+        <div class="font-head text-xs uppercase tracking-widest text-[var(--silver)]">Stack specialties</div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 img-mono overflow-hidden border border-[var(--steel)]"><img src="https://picsum.photos/seed/coach-frontend/80/80?grayscale" alt="" class="w-full h-full object-cover" /></div>
+        <div><div class="font-head text-sm uppercase">Frontend</div><div class="font-mono text-[10px] text-[var(--silver)]">React · Next.js</div></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 img-mono overflow-hidden border border-[var(--steel)]"><img src="https://picsum.photos/seed/coach-backend/80/80?grayscale" alt="" class="w-full h-full object-cover" /></div>
+        <div><div class="font-head text-sm uppercase">Backend</div><div class="font-mono text-[10px] text-[var(--silver)]">Node · Laravel</div></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 img-mono overflow-hidden border border-[var(--steel)]"><img src="https://picsum.photos/seed/coach-ml/80/80?grayscale" alt="" class="w-full h-full object-cover" /></div>
+        <div><div class="font-head text-sm uppercase">ML / AI</div><div class="font-mono text-[10px] text-[var(--silver)]">PyTorch · TF</div></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 img-mono overflow-hidden border border-[var(--steel)]"><img src="https://picsum.photos/seed/coach-devops/80/80?grayscale" alt="" class="w-full h-full object-cover" /></div>
+        <div><div class="font-head text-sm uppercase">DevOps</div><div class="font-mono text-[10px] text-[var(--silver)]">Docker · CI/CD</div></div>
+      </div>
+    </div>
+
+    <!-- Audio bars (hidden until unmuted) -->
+    <div id="audioBars" class="hidden absolute bottom-6 left-6 md:left-10 z-10 items-end gap-1 h-12">
+      <div class="audio-bar h-full" style="animation-delay:0s"></div>
+      <div class="audio-bar h-full" style="animation-delay:.1s"></div>
+      <div class="audio-bar h-full" style="animation-delay:.2s"></div>
+      <div class="audio-bar h-full" style="animation-delay:.05s"></div>
+      <div class="audio-bar h-full" style="animation-delay:.15s"></div>
+      <div class="audio-bar h-full" style="animation-delay:.25s"></div>
+      <div class="audio-bar h-full" style="animation-delay:.1s"></div>
+      <div class="audio-bar h-full" style="animation-delay:.3s"></div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="absolute bottom-6 right-6 md:right-10 z-10 hidden md:flex flex-col items-center gap-2">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)] [writing-mode:vertical-rl]">Scroll</span>
+    <span class="w-px h-12 bg-gradient-to-b from-[var(--ember)] to-transparent"></span>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="relative z-10 border-y border-[var(--steel)] bg-[var(--carbon)] overflow-hidden py-5">
+  <div class="marquee-track gap-12 font-display text-2xl md:text-3xl tracking-wider">
+    <span class="flex items-center gap-12">
+      <span>SCALABLE ARCHITECTURE</span><span class="text-[var(--ember)]">/</span>
+      <span>INTELLIGENT SYSTEMS</span><span class="text-[var(--ember)]">/</span>
+      <span>PRODUCTION-GRADE ML</span><span class="text-[var(--ember)]">/</span>
+      <span>FULL STACK CRAFT</span><span class="text-[var(--ember)]">/</span>
+      <span>DEEP LEARNING RESEARCH</span><span class="text-[var(--ember)]">/</span>
+      <span>CLOUD NATIVE</span><span class="text-[var(--ember)]">/</span>
+    </span>
+    <span class="flex items-center gap-12">
+      <span>SCALABLE ARCHITECTURE</span><span class="text-[var(--ember)]">/</span>
+      <span>INTELLIGENT SYSTEMS</span><span class="text-[var(--ember)]">/</span>
+      <span>PRODUCTION-GRADE ML</span><span class="text-[var(--ember)]">/</span>
+      <span>FULL STACK CRAFT</span><span class="text-[var(--ember)]">/</span>
+      <span>DEEP LEARNING RESEARCH</span><span class="text-[var(--ember)]">/</span>
+      <span>CLOUD NATIVE</span><span class="text-[var(--ember)]">/</span>
+    </span>
+  </div>
+</div>
+
+<!-- ===== ABOUT / MANIFESTO ===== -->
+<section id="about" class="relative py-24 md:py-36 px-6 md:px-10">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid md:grid-cols-12 gap-10 md:gap-16">
+      <!-- Left: image -->
+      <div class="md:col-span-5 reveal">
+        <div class="relative">
+          <div class="img-mono overflow-hidden border border-[var(--steel)] aspect-[4/5]">
+            <img src="https://picsum.photos/seed/wgr-portrait-arena/800/1000?grayscale" alt="Wahyu Galang Ramadhan Rumampuk" class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-6 -right-6 md:-right-12 bg-[var(--ember)] text-black px-6 py-4">
+            <div class="font-display text-4xl leading-none">08</div>
+            <div class="font-mono text-[10px] uppercase tracking-widest mt-1">Years in arena</div>
+          </div>
+          <div class="absolute -top-4 -left-4 stripe-bg w-24 h-24 border border-[var(--steel)] -z-10"></div>
+        </div>
+      </div>
+
+      <!-- Right: manifesto -->
+      <div class="md:col-span-7 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 02 / Manifesto ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold mb-8">
+          I don't write code.<br>
+          I <span class="ember-text">forge</span> systems.
+        </h2>
+        <div class="space-y-5 text-lg md:text-xl text-[var(--silver)] leading-snug max-w-2xl">
+          <p>
+            Every line is a rep. Every deployment is a lift. Every model trained is a personal record broken. I treat software craft the way athletes treat their discipline — obsessive, structured, never satisfied.
+          </p>
+          <p>
+            I'm a passionate software developer who builds modern web applications and intelligent AI systems end-to-end. From raw database schemas to fine-tuned transformers, from pixel-perfect interfaces to distributed backends — I ship the whole stack.
+          </p>
+        </div>
+
+        <!-- Expertise tags -->
+        <div class="mt-10 reveal-stagger flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 border border-[var(--steel)] font-mono text-xs uppercase tracking-wider text-[var(--silver)]">Full Stack Development</span>
+          <span class="px-3 py-1.5 border border-[var(--steel)] font-mono text-xs uppercase tracking-wider text-[var(--silver)]">REST APIs</span>
+          <span class="px-3 py-1.5 border border-[var(--steel)] font-mono text-xs uppercase tracking-wider text-[var(--silver)]">Backend Engineering</span>
+          <span class="px-3 py-1.5 border border-[var(--ember)] text-[var(--ember)] font-mono text-xs uppercase tracking-wider">Machine Learning</span>
+          <span class="px-3 py-1.5 border border-[var(--ember)] text-[var(--ember)] font-mono text-xs uppercase tracking-wider">Deep Learning</span>
+          <span class="px-3 py-1.5 border border-[var(--ember)] text-[var(--ember)] font-mono text-xs uppercase tracking-wider">Model Fine-tuning</span>
+          <span class="px-3 py-1.5 border border-[var(--steel)] font-mono text-xs uppercase tracking-wider text-[var(--silver)]">Artificial Intelligence</span>
+          <span class="px-3 py-1.5 border border-[var(--steel)] font-mono text-xs uppercase tracking-wider text-[var(--silver)]">Data Processing</span>
+          <span class="px-3 py-1.5 border border-[var(--steel)] font-mono text-xs uppercase tracking-wider text-[var(--silver)]">Cloud Deployment</span>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-12 grid grid-cols-3 gap-4 border-t border-[var(--steel)] pt-8">
+          <div>
+            <div class="font-display text-5xl md:text-6xl ember-text">42</div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)] mt-1">Shipped Projects</div>
+          </div>
+          <div>
+            <div class="font-display text-5xl md:text-6xl ember-text">18</div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)] mt-1">ML Models in Prod</div>
+          </div>
+          <div>
+            <div class="font-display text-5xl md:text-6xl ember-text">2.4M+</div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)] mt-1">API Requests / day</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CURRICULUM (SKILLS) ===== -->
+<section id="curriculum" class="relative py-24 md:py-36 px-6 md:px-10 bg-[var(--carbon)] border-y border-[var(--steel)]">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-7 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 03 / Curriculum ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold mb-4">
+          Three programs.<br>
+          One <span class="ember-text">complete</span> engineer.
+        </h2>
+        <p class="text-lg text-[var(--silver)] max-w-xl">
+          Skills organized by training objective — strength, conditioning, precision. Each program is a deliberate progression, not a checklist.
+        </p>
+      </div>
+      <div class="md:col-span-5 md:text-right reveal flex md:items-end md:justify-end">
+        <div class="font-mono text-xs text-[var(--silver)] max-w-sm">
+          <div class="text-[var(--ember)] mb-1">/ philosophy</div>
+          "Train the full spectrum. Specialize without blind spots. Ship what you sharpen."
+        </div>
+      </div>
+    </div>
+
+    <!-- Three pillars -->
+    <div class="grid lg:grid-cols-3 gap-6 reveal-stagger">
+      <!-- Pillar 1: STRENGTH -->
+      <article class="glow-card p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 outline-num leading-none -mr-4 -mt-4 select-none pointer-events-none">01</div>
+        <div class="relative">
+          <div class="num-tag mb-4">[ Strength · Muscle ]</div>
+          <h3 class="font-display text-5xl mb-2">FULL STACK</h3>
+          <p class="text-[var(--silver)] mb-8 leading-snug">
+            Building heavy structural components — interfaces, components, applications that carry real weight.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">Frontend</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">6 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">React</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Next.js</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Tailwind</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Bootstrap</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Framer Motion</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Redux</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">Languages</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">9 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Python</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">JavaScript</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">TypeScript</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Java</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Go</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">C#</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">HTML</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">CSS</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">SQL</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-[var(--steel)] flex items-center justify-between">
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Proficiency</div>
+            <div class="font-display text-2xl ember-text">95%</div>
+          </div>
+          <div class="skill-bar mt-2"><div class="skill-fill" data-fill="95"></div></div>
+        </div>
+      </article>
+
+      <!-- Pillar 2: CONDITIONING -->
+      <article class="glow-card p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 outline-num leading-none -mr-4 -mt-4 select-none pointer-events-none">02</div>
+        <div class="relative">
+          <div class="num-tag mb-4">[ Conditioning · Endurance ]</div>
+          <h3 class="font-display text-5xl mb-2">BACKEND</h3>
+          <p class="text-[var(--silver)] mb-8 leading-snug">
+            Systems that last. APIs, databases, pipelines — built for sustained load, not just sprint days.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">Backend</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">6 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Node.js</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Express.js</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Laravel</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">REST API</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">JWT Auth</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Microservices</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">DevOps & Cloud</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">7 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Docker</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Git</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">GitHub</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Linux</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Vercel</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Firebase</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">CI/CD</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">Databases</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">3 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">PostgreSQL</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">MySQL</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">MongoDB</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-[var(--steel)] flex items-center justify-between">
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Proficiency</div>
+            <div class="font-display text-2xl ember-text">92%</div>
+          </div>
+          <div class="skill-bar mt-2"><div class="skill-fill" data-fill="92"></div></div>
+        </div>
+      </article>
+
+      <!-- Pillar 3: PRECISION -->
+      <article class="glow-card p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 outline-num leading-none -mr-4 -mt-4 select-none pointer-events-none">03</div>
+        <div class="relative">
+          <div class="num-tag mb-4">[ Precision · Mastery ]</div>
+          <h3 class="font-display text-5xl mb-2">ML / AI</h3>
+          <p class="text-[var(--silver)] mb-8 leading-snug">
+            The art of intelligence — vision, language, recommendation. Where craft meets mathematics meets patience.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">Core ML</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">7 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">ML</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Deep Learning</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Computer Vision</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">NLP</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Transfer Learning</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Feature Engineering</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Model Evaluation</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">Frameworks</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">5 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">TensorFlow</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">PyTorch</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Scikit-learn</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Hugging Face</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Transformers</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-baseline mb-1.5">
+                <span class="font-head text-sm uppercase tracking-wider">Advanced</span>
+                <span class="font-mono text-[10px] text-[var(--ember)]">3 LIFTS</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Fine-tuning LLMs</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Pandas</span>
+                <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">NumPy</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-[var(--steel)] flex items-center justify-between">
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Proficiency</div>
+            <div class="font-display text-2xl ember-text">88%</div>
+          </div>
+          <div class="skill-bar mt-2"><div class="skill-fill" data-fill="88"></div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COACHES / EXPERIENCE (FLIP CARDS) ===== -->
+<section id="coaches" class="relative py-24 md:py-36 px-6 md:px-10">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 04 / Coach Roster ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold">
+          Roles <span class="ember-text">forged</span> in the field.
+        </h2>
+        <p class="text-lg text-[var(--silver)] mt-4 max-w-2xl">
+          Professional background as coach cards. Hover to flip — certifications and signature work on the back.
+        </p>
+      </div>
+      <div class="md:col-span-4 md:text-right reveal flex md:items-end md:justify-end">
+        <div class="font-mono text-xs text-[var(--silver)] max-w-xs">
+          <div class="text-[var(--ember)] mb-1">/ hint</div>
+          Hover (or tap) each card to reveal the back.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-stagger">
+      <!-- Coach 1 -->
+      <div class="flip-card h-[440px]" data-flip>
+        <div class="flip-inner">
+          <div class="flip-face glow-card p-6 flex flex-col">
+            <div class="img-mono aspect-[4/5] overflow-hidden border border-[var(--steel)] -mx-6 -mt-6 mb-4">
+              <img src="https://picsum.photos/seed/coach-fullstack-wgr/600/750?grayscale" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="num-tag mb-1">[ 2018 — Now ]</div>
+            <h3 class="font-display text-3xl leading-none">FULL STACK<br>DEVELOPER</h3>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)] flex items-center justify-between">
+              <span class="font-head text-xs uppercase tracking-widest text-[var(--silver)]">Forge Labs</span>
+              <i class="fa-solid fa-rotate text-[var(--ember)] text-sm"></i>
+            </div>
+          </div>
+          <div class="flip-face flip-back glow-card p-6 flex flex-col" style="border-color:var(--ember)">
+            <div class="num-tag mb-2">[ Certifications ]</div>
+            <h3 class="font-display text-2xl mb-4 ember-text">Signature Stack</h3>
+            <ul class="space-y-2 text-sm text-[var(--silver)] mb-4">
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>React + Next.js architecture</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Type-safe end-to-end</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Real-time interfaces (WebSocket)</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Design systems at scale</li>
+            </ul>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)]">
+              <div class="font-mono text-[10px] text-[var(--ember)] uppercase tracking-widest mb-1">Signature Workout</div>
+              <div class="font-head text-sm">"The Full Spectrum" — UI to DB in one sprint.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach 2 -->
+      <div class="flip-card h-[440px]" data-flip>
+        <div class="flip-inner">
+          <div class="flip-face glow-card p-6 flex flex-col">
+            <div class="img-mono aspect-[4/5] overflow-hidden border border-[var(--steel)] -mx-6 -mt-6 mb-4">
+              <img src="https://picsum.photos/seed/coach-backend-wgr/600/750?grayscale" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="num-tag mb-1">[ 2021 — 2023 ]</div>
+            <h3 class="font-display text-3xl leading-none">BACKEND<br>DEVELOPER</h3>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)] flex items-center justify-between">
+              <span class="font-head text-xs uppercase tracking-widest text-[var(--silver)]">Apex Systems</span>
+              <i class="fa-solid fa-rotate text-[var(--ember)] text-sm"></i>
+            </div>
+          </div>
+          <div class="flip-face flip-back glow-card p-6 flex flex-col" style="border-color:var(--ember)">
+            <div class="num-tag mb-2">[ Certifications ]</div>
+            <h3 class="font-display text-2xl mb-4 ember-text">Signature Stack</h3>
+            <ul class="space-y-2 text-sm text-[var(--silver)] mb-4">
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Node.js / Express microservices</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Laravel enterprise modules</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>JWT + OAuth2 flows</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>PostgreSQL query tuning</li>
+            </ul>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)]">
+              <div class="font-mono text-[10px] text-[var(--ember)] uppercase tracking-widest mb-1">Signature Workout</div>
+              <div class="font-head text-sm">"High-Throughput" — 2.4M req/day on 3 nodes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach 3 -->
+      <div class="flip-card h-[440px]" data-flip>
+        <div class="flip-inner">
+          <div class="flip-face glow-card p-6 flex flex-col">
+            <div class="img-mono aspect-[4/5] overflow-hidden border border-[var(--steel)] -mx-6 -mt-6 mb-4">
+              <img src="https://picsum.photos/seed/coach-mlengineer-wgr/600/750?grayscale" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="num-tag mb-1">[ 2022 — 2024 ]</div>
+            <h3 class="font-display text-3xl leading-none">MACHINE LEARNING<br>ENGINEER</h3>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)] flex items-center justify-between">
+              <span class="font-head text-xs uppercase tracking-widest text-[var(--silver)]">Neural Forge</span>
+              <i class="fa-solid fa-rotate text-[var(--ember)] text-sm"></i>
+            </div>
+          </div>
+          <div class="flip-face flip-back glow-card p-6 flex flex-col" style="border-color:var(--ember)">
+            <div class="num-tag mb-2">[ Certifications ]</div>
+            <h3 class="font-display text-2xl mb-4 ember-text">Signature Stack</h3>
+            <ul class="space-y-2 text-sm text-[var(--silver)] mb-4">
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>PyTorch / TensorFlow pipelines</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Computer Vision (YOLO, ResNet)</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>NLP & Hugging Face Transformers</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Transfer learning & fine-tuning</li>
+            </ul>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)]">
+              <div class="font-mono text-[10px] text-[var(--ember)] uppercase tracking-widest mb-1">Signature Workout</div>
+              <div class="font-head text-sm">"Vision-to-Prod" — 18 models deployed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach 4 -->
+      <div class="flip-card h-[440px]" data-flip>
+        <div class="flip-inner">
+          <div class="flip-face glow-card p-6 flex flex-col">
+            <div class="img-mono aspect-[4/5] overflow-hidden border border-[var(--steel)] -mx-6 -mt-6 mb-4">
+              <img src="https://picsum.photos/seed/coach-aidev-wgr/600/750?grayscale" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="num-tag mb-1">[ 2024 — Now ]</div>
+            <h3 class="font-display text-3xl leading-none">AI<br>DEVELOPER</h3>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)] flex items-center justify-between">
+              <span class="font-head text-xs uppercase tracking-widest text-[var(--silver)]">Independent</span>
+              <i class="fa-solid fa-rotate text-[var(--ember)] text-sm"></i>
+            </div>
+          </div>
+          <div class="flip-face flip-back glow-card p-6 flex flex-col" style="border-color:var(--ember)">
+            <div class="num-tag mb-2">[ Certifications ]</div>
+            <h3 class="font-display text-2xl mb-4 ember-text">Signature Stack</h3>
+            <ul class="space-y-2 text-sm text-[var(--silver)] mb-4">
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>LLM fine-tuning (LoRA, QLoRA)</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>RAG systems & vector DBs</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>AI integration in production apps</li>
+              <li class="flex gap-2"><i class="fa-solid fa-check text-[var(--ember)] mt-1 text-xs"></i>Model evaluation & alignment</li>
+            </ul>
+            <div class="mt-auto pt-4 border-t border-[var(--steel)]">
+              <div class="font-mono text-[10px] text-[var(--ember)] uppercase tracking-widest mb-1">Signature Workout</div>
+              <div class="font-head text-sm">"Custom LLM" — domain-tuned, on-prem.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience timeline -->
+    <div class="mt-20 reveal">
+      <div class="num-tag mb-6">[ Career Timeline ]</div>
+      <div class="relative">
+        <div class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--ember)] via-[var(--steel)] to-transparent"></div>
+        <div class="space-y-8 pl-8">
+          <div class="relative">
+            <div class="absolute -left-[37px] top-2 w-3 h-3 bg-[var(--ember)] rounded-full ring-4 ring-[var(--void)]"></div>
+            <div class="flex flex-wrap items-baseline gap-4">
+              <span class="font-mono text-xs text-[var(--ember)]">2024 — NOW</span>
+              <h4 class="font-head text-xl uppercase tracking-wider">AI Developer · Independent</h4>
+            </div>
+            <p class="text-[var(--silver)] mt-1">Building custom LLM solutions, RAG pipelines, and AI-integrated applications for clients worldwide.</p>
+          </div>
+          <div class="relative">
+            <div class="absolute -left-[37px] top-2 w-3 h-3 bg-[var(--ember)] rounded-full ring-4 ring-[var(--void)]"></div>
+            <div class="flex flex-wrap items-baseline gap-4">
+              <span class="font-mono text-xs text-[var(--ember)]">2022 — 2024</span>
+              <h4 class="font-head text-xl uppercase tracking-wider">ML Engineer · Neural Forge</h4>
+            </div>
+            <p class="text-[var(--silver)] mt-1">Deployed 18 production ML models — vision, NLP, recommendation. Built training pipelines & evaluation frameworks.</p>
+          </div>
+          <div class="relative">
+            <div class="absolute -left-[37px] top-2 w-3 h-3 bg-[var(--ember)] rounded-full ring-4 ring-[var(--void)]"></div>
+            <div class="flex flex-wrap items-baseline gap-4">
+              <span class="font-mono text-xs text-[var(--ember)]">2021 — 2023</span>
+              <h4 class="font-head text-xl uppercase tracking-wider">Backend Developer · Apex Systems</h4>
+            </div>
+            <p class="text-[var(--silver)] mt-1">Architected Node.js & Laravel backends handling 2.4M+ requests/day. Designed REST APIs and JWT auth systems.</p>
+          </div>
+          <div class="relative">
+            <div class="absolute -left-[37px] top-2 w-3 h-3 bg-[var(--ember)] rounded-full ring-4 ring-[var(--void)]"></div>
+            <div class="flex flex-wrap items-baseline gap-4">
+              <span class="font-mono text-xs text-[var(--ember)]">2018 — 2021</span>
+              <h4 class="font-head text-xl uppercase tracking-wider">Full Stack Developer · Forge Labs</h4>
+            </div>
+            <p class="text-[var(--silver)] mt-1">Shipped 42+ web applications end-to-end. Specialized in React/Next.js frontends with TypeScript.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEMBER STORIES / PROJECTS (CAROUSEL) ===== -->
+<section id="stories" class="relative py-24 md:py-36 overflow-hidden">
+  <div class="px-6 md:px-10 max-w-[1600px] mx-auto mb-12">
+    <div class="grid md:grid-cols-12 gap-8">
+      <div class="md:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 05 / Member Stories ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold">
+          Real <span class="ember-text">transformations.</span><br>
+          Real shipped work.
+        </h2>
+        <p class="text-lg text-[var(--silver)] mt-4 max-w-2xl">
+          Drag to swipe. Each card is a case study — what was built, what was lifted, what broke and got rebuilt.
+        </p>
+      </div>
+      <div class="md:col-span-4 md:text-right reveal flex md:items-end md:justify-end gap-3">
+        <button id="prevStory" data-hover class="w-12 h-12 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] transition flex items-center justify-center" aria-label="Previous">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <button id="nextStory" data-hover class="w-12 h-12 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] transition flex items-center justify-center" aria-label="Next">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel -->
+  <div class="relative">
+    <div id="storyCarousel" class="carousel-track flex gap-6 px-6 md:px-10">
+      <!-- Story 1 -->
+      <article class="glow-card flex-shrink-0 w-[88vw] sm:w-[440px] md:w-[480px] overflow-hidden group" data-hover>
+        <div class="img-mono overflow-hidden aspect-[16/10] border-b border-[var(--steel)] relative">
+          <img src="https://picsum.photos/seed/proj-neural-vision/800/500?grayscale" alt="" class="w-full h-full object-cover" />
+          <div class="absolute top-3 left-3 num-tag bg-[var(--void)]/80 px-2 py-1">[ 01 / 06 ]</div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 bg-[var(--ember)] text-black font-mono text-[10px] uppercase tracking-widest">AI · CV</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-3xl">NEURAL VISION</h3>
+            <span class="font-mono text-[10px] text-[var(--silver)]">2024</span>
+          </div>
+          <p class="text-[var(--silver)] mb-4 text-sm leading-snug">
+            Image classification platform serving 50+ classes with 96.4% accuracy. Real-time inference pipeline with PyTorch + FastAPI.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">PyTorch</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">FastAPI</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">ResNet50</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Docker</span>
+          </div>
+          <div class="flex gap-2">
+            <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] font-head text-xs uppercase tracking-widest transition">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a href="#" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-[var(--ember)] text-black hover:bg-[var(--ember-bright)] font-head text-xs uppercase tracking-widest font-semibold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Story 2 -->
+      <article class="glow-card flex-shrink-0 w-[88vw] sm:w-[440px] md:w-[480px] overflow-hidden group" data-hover>
+        <div class="img-mono overflow-hidden aspect-[16/10] border-b border-[var(--steel)] relative">
+          <img src="https://picsum.photos/seed/proj-sentinel-api/800/500?grayscale" alt="" class="w-full h-full object-cover" />
+          <div class="absolute top-3 left-3 num-tag bg-[var(--void)]/80 px-2 py-1">[ 02 / 06 ]</div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 bg-[var(--ember)] text-black font-mono text-[10px] uppercase tracking-widest">BACKEND</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-3xl">SENTINEL API</h3>
+            <span class="font-mono text-[10px] text-[var(--silver)]">2023</span>
+          </div>
+          <p class="text-[var(--silver)] mb-4 text-sm leading-snug">
+            High-throughput REST API gateway handling 2.4M requests/day. JWT auth, rate limiting, observability stack included.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Node.js</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Express</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">PostgreSQL</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Redis</span>
+          </div>
+          <div class="flex gap-2">
+            <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] font-head text-xs uppercase tracking-widest transition">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a href="#" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-[var(--ember)] text-black hover:bg-[var(--ember-bright)] font-head text-xs uppercase tracking-widest font-semibold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Story 3 -->
+      <article class="glow-card flex-shrink-0 w-[88vw] sm:w-[440px] md:w-[480px] overflow-hidden group" data-hover>
+        <div class="img-mono overflow-hidden aspect-[16/10] border-b border-[var(--steel)] relative">
+          <img src="https://picsum.photos/seed/proj-llm-forge/800/500?grayscale" alt="" class="w-full h-full object-cover" />
+          <div class="absolute top-3 left-3 num-tag bg-[var(--void)]/80 px-2 py-1">[ 03 / 06 ]</div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 bg-[var(--ember)] text-black font-mono text-[10px] uppercase tracking-widest">LLM</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-3xl">LLM FORGE</h3>
+            <span class="font-mono text-[10px] text-[var(--silver)]">2024</span>
+          </div>
+          <p class="text-[var(--silver)] mb-4 text-sm leading-snug">
+            Fine-tuning pipeline for custom LLMs with LoRA/QLoRA. Domain adaptation for legal and medical text, served via vLLM.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Hugging Face</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">PyTorch</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">LoRA</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">vLLM</span>
+          </div>
+          <div class="flex gap-2">
+            <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] font-head text-xs uppercase tracking-widest transition">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a href="#" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-[var(--ember)] text-black hover:bg-[var(--ember-bright)] font-head text-xs uppercase tracking-widest font-semibold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Story 4 -->
+      <article class="glow-card flex-shrink-0 w-[88vw] sm:w-[440px] md:w-[480px] overflow-hidden group" data-hover>
+        <div class="img-mono overflow-hidden aspect-[16/10] border-b border-[var(--steel)] relative">
+          <img src="https://picsum.photos/seed/proj-pulse-dashboard/800/500?grayscale" alt="" class="w-full h-full object-cover" />
+          <div class="absolute top-3 left-3 num-tag bg-[var(--void)]/80 px-2 py-1">[ 04 / 06 ]</div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 bg-[var(--ember)] text-black font-mono text-[10px] uppercase tracking-widest">FULL STACK</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-3xl">PULSE</h3>
+            <span class="font-mono text-[10px] text-[var(--silver)]">2023</span>
+          </div>
+          <p class="text-[var(--silver)] mb-4 text-sm leading-snug">
+            Real-time analytics dashboard with WebSocket feeds, sub-100ms updates, and predictive ML alerts. Used by 200+ operators.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Next.js</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">TypeScript</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">WebSocket</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">MongoDB</span>
+          </div>
+          <div class="flex gap-2">
+            <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] font-head text-xs uppercase tracking-widest transition">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a href="#" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-[var(--ember)] text-black hover:bg-[var(--ember-bright)] font-head text-xs uppercase tracking-widest font-semibold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Story 5 -->
+      <article class="glow-card flex-shrink-0 w-[88vw] sm:w-[440px] md:w-[480px] overflow-hidden group" data-hover>
+        <div class="img-mono overflow-hidden aspect-[16/10] border-b border-[var(--steel)] relative">
+          <img src="https://picsum.photos/seed/proj-recsys-engine/800/500?grayscale" alt="" class="w-full h-full object-cover" />
+          <div class="absolute top-3 left-3 num-tag bg-[var(--void)]/80 px-2 py-1">[ 05 / 06 ]</div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 bg-[var(--ember)] text-black font-mono text-[10px] uppercase tracking-widest">ML</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-3xl">RECSYS</h3>
+            <span class="font-mono text-[10px] text-[var(--silver)]">2024</span>
+          </div>
+          <p class="text-[var(--silver)] mb-4 text-sm leading-snug">
+            Hybrid recommendation system combining collaborative filtering + content embeddings. +34% engagement in production.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Scikit-learn</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">TensorFlow</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Pandas</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Redis</span>
+          </div>
+          <div class="flex gap-2">
+            <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] font-head text-xs uppercase tracking-widest transition">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a href="#" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-[var(--ember)] text-black hover:bg-[var(--ember-bright)] font-head text-xs uppercase tracking-widest font-semibold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Story 6 -->
+      <article class="glow-card flex-shrink-0 w-[88vw] sm:w-[440px] md:w-[480px] overflow-hidden group" data-hover>
+        <div class="img-mono overflow-hidden aspect-[16/10] border-b border-[var(--steel)] relative">
+          <img src="https://picsum.photos/seed/proj-devforge-platform/800/500?grayscale" alt="" class="w-full h-full object-cover" />
+          <div class="absolute top-3 left-3 num-tag bg-[var(--void)]/80 px-2 py-1">[ 06 / 06 ]</div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 bg-[var(--ember)] text-black font-mono text-[10px] uppercase tracking-widest">FULL STACK</div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-display text-3xl">DEVFORGE</h3>
+            <span class="font-mono text-[10px] text-[var(--silver)]">2022</span>
+          </div>
+          <p class="text-[var(--silver)] mb-4 text-sm leading-snug">
+            End-to-end developer platform — auth, billing, CI/CD pipelines, and team collaboration. Laravel + React + Docker swarm.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Laravel</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">React</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">MySQL</span>
+            <span class="px-2 py-1 bg-[var(--ash-2)] border border-[var(--steel)] font-mono text-[10px]">Docker Swarm</span>
+          </div>
+          <div class="flex gap-2">
+            <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] font-head text-xs uppercase tracking-widest transition">
+              <i class="fa-brands fa-github"></i> Code
+            </a>
+            <a href="#" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-[var(--ember)] text-black hover:bg-[var(--ember-bright)] font-head text-xs uppercase tracking-widest font-semibold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="mt-8 px-6 md:px-10 max-w-[1600px] mx-auto flex items-center gap-4">
+    <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Drag · Swipe</div>
+    <div class="flex-1 h-px bg-[var(--steel)] relative overflow-hidden">
+      <div id="storyProgress" class="absolute left-0 top-0 bottom-0 bg-[var(--ember)] w-0 transition-all duration-300"></div>
+    </div>
+    <div class="font-mono text-[10px] text-[var(--ember)]"><span id="storyIndex">01</span> / 06</div>
+  </div>
+</section>
+
+<!-- ===== ML SHOWCASE ===== -->
+<section id="ml-showcase" class="relative py-24 md:py-36 px-6 md:px-10 bg-[var(--carbon)] border-y border-[var(--steel)]">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 06 / ML Pipeline ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold">
+          The <span class="ember-text">training</span> pipeline.
+        </h2>
+        <p class="text-lg text-[var(--silver)] mt-4 max-w-2xl">
+          Every model follows the same discipline — from raw data to deployed inference. Six stages, zero shortcuts.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="reveal mb-16">
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-0 relative">
+        <div class="pipeline-node relative p-5 border border-[var(--steel)] bg-[var(--ash)]">
+          <div class="num-tag mb-2">[ 01 ]</div>
+          <div class="font-head text-base md:text-lg uppercase tracking-wider">Data Collection</div>
+        </div>
+        <div class="pipeline-node relative p-5 border border-[var(--steel)] bg-[var(--ash)] md:border-l-0">
+          <div class="num-tag mb-2">[ 02 ]</div>
+          <div class="font-head text-base md:text-lg uppercase tracking-wider">Preprocessing</div>
+        </div>
+        <div class="pipeline-node relative p-5 border border-[var(--steel)] bg-[var(--ash)] md:border-l-0">
+          <div class="num-tag mb-2">[ 03 ]</div>
+          <div class="font-head text-base md:text-lg uppercase tracking-wider">Model Training</div>
+        </div>
+        <div class="pipeline-node relative p-5 border border-[var(--ember)] bg-[var(--ash)] md:border-l-0" style="box-shadow:inset 0 0 20px rgba(255,90,0,.1)">
+          <div class="num-tag mb-2">[ 04 ]</div>
+          <div class="font-head text-base md:text-lg uppercase tracking-wider ember-text">Fine-Tuning</div>
+        </div>
+        <div class="pipeline-node relative p-5 border border-[var(--steel)] bg-[var(--ash)] md:border-l-0">
+          <div class="num-tag mb-2">[ 05 ]</div>
+          <div class="font-head text-base md:text-lg uppercase tracking-wider">Evaluation</div>
+        </div>
+        <div class="pipeline-node relative p-5 border border-[var(--steel)] bg-[var(--ash)] md:border-l-0">
+          <div class="num-tag mb-2">[ 06 ]</div>
+          <div class="font-head text-base md:text-lg uppercase tracking-wider">Deployment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ML Capabilities grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal-stagger">
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-image text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">IMAGE CLASSIFICATION</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">CNN architectures, transfer learning, custom datasets, real-time inference.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">ResNet · VGG · EfficientNet</div>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-eye text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">OBJECT DETECTION</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">Real-time detection for video streams, edge deployment, multi-class tracking.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">YOLO · SSD · DETR</div>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-language text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">NATURAL LANGUAGE</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">Text classification, sentiment, NER, embeddings, semantic search pipelines.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">BERT · Sentence-BERT · spaCy</div>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-sliders text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">RECOMMENDATION</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">Hybrid filtering, content embeddings, cold-start handling, A/B-tested in prod.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">Collab · Content · Matrix Factor</div>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-brain text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">LARGE LANGUAGE MODELS</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">RAG systems, prompt engineering, custom agents, vector DB integration.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">GPT · Llama · Mistral · Claude</div>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-wrench text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">FINE-TUNING</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">LoRA / QLoRA adapters, domain adaptation, evaluation harnesses, alignment.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">PEFT · TRL · Evaluation</div>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-flask text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">DEEP LEARNING RESEARCH</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">Custom architectures, ablation studies, hyperparameter optimization at scale.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">PyTorch · Ray · W&B</div>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="w-12 h-12 border border-[var(--ember)] flex items-center justify-center mb-4 group-hover:bg-[var(--ember)] transition">
+          <i class="fa-solid fa-chart-line text-[var(--ember)] group-hover:text-black transition"></i>
+        </div>
+        <h3 class="font-display text-2xl mb-2">DATA ANALYSIS</h3>
+        <p class="text-sm text-[var(--silver)] mb-3">EDA, feature engineering, statistical modeling, visualization pipelines.</p>
+        <div class="font-mono text-[10px] text-[var(--ember)]">Pandas · NumPy · Plotly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECH STACK VISUALIZATION ===== -->
+<section id="stack" class="relative py-24 md:py-36 px-6 md:px-10">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 07 / Tech Stack ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold">
+          The <span class="ember-text">arsenal.</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4 reveal-stagger">
+      <!-- Languages -->
+      <div class="glow-card p-6">
+        <div class="num-tag mb-3">[ Languages ]</div>
+        <div class="space-y-2 font-head text-base uppercase tracking-wider">
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-python text-[var(--ember)]"></i> Python</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-js text-[var(--ember)]"></i> JavaScript</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-code text-[var(--ember)]"></i> TypeScript</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-java text-[var(--ember)]"></i> Java</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-bolt text-[var(--ember)]"></i> Go</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-hashtag text-[var(--ember)]"></i> C#</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-html5 text-[var(--ember)]"></i> HTML</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-css3-alt text-[var(--ember)]"></i> CSS</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-database text-[var(--ember)]"></i> SQL</div>
+        </div>
+      </div>
+
+      <!-- Frontend -->
+      <div class="glow-card p-6">
+        <div class="num-tag mb-3">[ Frontend ]</div>
+        <div class="space-y-2 font-head text-base uppercase tracking-wider">
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-react text-[var(--ember)]"></i> React</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-bolt text-[var(--ember)]"></i> Next.js</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-wind text-[var(--ember)]"></i> Tailwind</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-bootstrap text-[var(--ember)]"></i> Bootstrap</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-film text-[var(--ember)]"></i> Framer Motion</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-cubes text-[var(--ember)]"></i> Redux</div>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div class="glow-card p-6">
+        <div class="num-tag mb-3">[ Backend ]</div>
+        <div class="space-y-2 font-head text-base uppercase tracking-wider">
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-node-js text-[var(--ember)]"></i> Node.js</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-server text-[var(--ember)]"></i> Express.js</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-laravel text-[var(--ember)]"></i> Laravel</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-plug text-[var(--ember)]"></i> REST API</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-key text-[var(--ember)]"></i> JWT Auth</div>
+        </div>
+      </div>
+
+      <!-- AI/ML -->
+      <div class="glow-card p-6">
+        <div class="num-tag mb-3">[ AI / ML ]</div>
+        <div class="space-y-2 font-head text-base uppercase tracking-wider">
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-brain text-[var(--ember)]"></i> TensorFlow</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-fire text-[var(--ember)]"></i> PyTorch</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-flask text-[var(--ember)]"></i> Scikit-learn</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-face-smile text-[var(--ember)]"></i> Hugging Face</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-transformer text-[var(--ember)]"></i> Transformers</div>
+        </div>
+      </div>
+
+      <!-- Databases -->
+      <div class="glow-card p-6">
+        <div class="num-tag mb-3">[ Databases ]</div>
+        <div class="space-y-2 font-head text-base uppercase tracking-wider">
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-elephant text-[var(--ember)]"></i> PostgreSQL</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-database text-[var(--ember)]"></i> MySQL</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-leaf text-[var(--ember)]"></i> MongoDB</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-bolt-lightning text-[var(--ember)]"></i> Redis</div>
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div class="glow-card p-6">
+        <div class="num-tag mb-3">[ DevOps ]</div>
+        <div class="space-y-2 font-head text-base uppercase tracking-wider">
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-docker text-[var(--ember)]"></i> Docker</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-git-alt text-[var(--ember)]"></i> Git</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-github text-[var(--ember)]"></i> GitHub</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-brands fa-linux text-[var(--ember)]"></i> Linux</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-triangle text-[var(--ember)]"></i> Vercel</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-fire-flame-curved text-[var(--ember)]"></i> Firebase</div>
+          <div class="flex items-center gap-2 hover:text-[var(--ember)] transition cursor-default"><i class="fa-solid fa-infinity text-[var(--ember)]"></i> CI/CD</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GITHUB SECTION ===== -->
+<section id="github" class="relative py-24 md:py-36 px-6 md:px-10 bg-[var(--carbon)] border-y border-[var(--steel)]">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid md:grid-cols-12 gap-8 mb-12">
+      <div class="md:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 08 / GitHub ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold">
+          The <span class="ember-text">commit</span> log never lies.
+        </h2>
+      </div>
+      <div class="md:col-span-4 md:text-right reveal flex md:items-end md:justify-end">
+        <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="inline-flex items-center gap-2 px-5 py-3 border border-[var(--ember)] text-[var(--ember)] hover:bg-[var(--ember)] hover:text-black font-head text-xs uppercase tracking-widest font-semibold transition">
+          <i class="fa-brands fa-github"></i> github.com/Whyuugl
+        </a>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      <!-- Contribution calendar -->
+      <div class="lg:col-span-2 glow-card p-6 md:p-8 reveal">
+        <div class="flex items-baseline justify-between mb-6">
+          <div>
+            <div class="num-tag mb-1">[ Contribution Calendar ]</div>
+            <h3 class="font-display text-3xl">2,847 CONTRIBUTIONS</h3>
+          </div>
+          <div class="text-right">
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Current Streak</div>
+            <div class="font-display text-3xl ember-text">94 days</div>
+          </div>
+        </div>
+        <div id="contribGrid" class="grid grid-flow-col gap-[3px] overflow-hidden"></div>
+        <div class="mt-4 flex items-center justify-between">
+          <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Less</div>
+          <div class="flex gap-[3px]">
+            <div class="w-3 h-3 bg-[var(--ash-2)]"></div>
+            <div class="w-3 h-3 bg-[rgba(255,90,0,0.2)]"></div>
+            <div class="w-3 h-3 bg-[rgba(255,90,0,0.4)]"></div>
+            <div class="w-3 h-3 bg-[rgba(255,90,0,0.7)]"></div>
+            <div class="w-3 h-3 bg-[var(--ember)]"></div>
+          </div>
+          <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">More</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="space-y-4 reveal">
+        <div class="glow-card p-6 flex items-center justify-between">
+          <div>
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Public Repos</div>
+            <div class="font-display text-4xl ember-text">68</div>
+          </div>
+          <i class="fa-solid fa-book-bookmark text-3xl text-[var(--steel)]"></i>
+        </div>
+        <div class="glow-card p-6 flex items-center justify-between">
+          <div>
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Total Stars</div>
+            <div class="font-display text-4xl ember-text">412</div>
+          </div>
+          <i class="fa-solid fa-star text-3xl text-[var(--steel)]"></i>
+        </div>
+        <div class="glow-card p-6 flex items-center justify-between">
+          <div>
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Followers</div>
+            <div class="font-display text-4xl ember-text">218</div>
+          </div>
+          <i class="fa-solid fa-users text-3xl text-[var(--steel)]"></i>
+        </div>
+        <div class="glow-card p-6 flex items-center justify-between">
+          <div>
+            <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">Longest Streak</div>
+            <div class="font-display text-4xl ember-text">147 days</div>
+          </div>
+          <i class="fa-solid fa-fire text-3xl text-[var(--steel)]"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Languages + recent repos -->
+    <div class="grid lg:grid-cols-2 gap-6 mt-6">
+      <!-- Top languages -->
+      <div class="glow-card p-6 md:p-8 reveal">
+        <div class="num-tag mb-4">[ Most Used Languages ]</div>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between items-baseline mb-1.5">
+              <span class="font-head text-sm uppercase tracking-wider">Python</span>
+              <span class="font-mono text-xs text-[var(--ember)]">38.4%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-fill="38"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-1.5">
+              <span class="font-head text-sm uppercase tracking-wider">TypeScript</span>
+              <span class="font-mono text-xs text-[var(--ember)]">24.7%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-fill="25"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-1.5">
+              <span class="font-head text-sm uppercase tracking-wider">JavaScript</span>
+              <span class="font-mono text-xs text-[var(--ember)]">18.2%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-fill="18"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-1.5">
+              <span class="font-head text-sm uppercase tracking-wider">Go</span>
+              <span class="font-mono text-xs text-[var(--ember)]">9.1%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-fill="9"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-1.5">
+              <span class="font-head text-sm uppercase tracking-wider">PHP</span>
+              <span class="font-mono text-xs text-[var(--ember)]">6.3%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-fill="6"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-1.5">
+              <span class="font-head text-sm uppercase tracking-wider">Other</span>
+              <span class="font-mono text-xs text-[var(--ember)]">3.3%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-fill="3"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent repos -->
+      <div class="glow-card p-6 md:p-8 reveal">
+        <div class="num-tag mb-4">[ Repository Highlights ]</div>
+        <div class="space-y-3">
+          <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="block group p-3 -mx-3 hover:bg-[var(--ash-2)] transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-head text-base uppercase tracking-wider group-hover:text-[var(--ember)] transition"><i class="fa-solid fa-book mr-2 text-[var(--silver)]"></i>neural-vision</span>
+              <span class="font-mono text-[10px] text-[var(--silver)]">★ 84</span>
+            </div>
+            <p class="text-sm text-[var(--silver)]">Real-time image classification platform with PyTorch + FastAPI.</p>
+          </a>
+          <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="block group p-3 -mx-3 hover:bg-[var(--ash-2)] transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-head text-base uppercase tracking-wider group-hover:text-[var(--ember)] transition"><i class="fa-solid fa-book mr-2 text-[var(--silver)]"></i>llm-forge</span>
+              <span class="font-mono text-[10px] text-[var(--silver)]">★ 127</span>
+            </div>
+            <p class="text-sm text-[var(--silver)]">Fine-tuning pipeline for custom LLMs with LoRA/QLoRA adapters.</p>
+          </a>
+          <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="block group p-3 -mx-3 hover:bg-[var(--ash-2)] transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-head text-base uppercase tracking-wider group-hover:text-[var(--ember)] transition"><i class="fa-solid fa-book mr-2 text-[var(--silver)]"></i>sentinel-api</span>
+              <span class="font-mono text-[10px] text-[var(--silver)]">★ 56</span>
+            </div>
+            <p class="text-sm text-[var(--silver)]">High-throughput REST API gateway with JWT, rate limiting, observability.</p>
+          </a>
+          <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="block group p-3 -mx-3 hover:bg-[var(--ash-2)] transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-head text-base uppercase tracking-wider group-hover:text-[var(--ember)] transition"><i class="fa-solid fa-book mr-2 text-[var(--silver)]"></i>recsys-engine</span>
+              <span class="font-mono text-[10px] text-[var(--silver)]">★ 73</span>
+            </div>
+            <p class="text-sm text-[var(--silver)]">Hybrid recommendation system — collaborative + content embeddings.</p>
+          </a>
+          <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="block group p-3 -mx-3 hover:bg-[var(--ash-2)] transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-head text-base uppercase tracking-wider group-hover:text-[var(--ember)] transition"><i class="fa-solid fa-book mr-2 text-[var(--silver)]"></i>pulse-dashboard</span>
+              <span class="font-mono text-[10px] text-[var(--silver)]">★ 42</span>
+            </div>
+            <p class="text-sm text-[var(--silver)]">Real-time analytics dashboard with WebSocket feeds & ML alerts.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="relative py-24 md:py-36 px-6 md:px-10">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 09 / Services ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-xl font-bold">
+          What I <span class="ember-text">forge</span> for you.
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal-stagger">
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 01 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">FULL STACK WEB DEVELOPMENT</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">End-to-end web apps with React, Next.js, Node.js. From UI to database, deployed.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 02 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">BACKEND API DEVELOPMENT</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">REST APIs, microservices, auth systems. Built for scale, documented for teams.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 03 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">MACHINE LEARNING SOLUTIONS</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">Custom ML pipelines — vision, NLP, recommendations. From data to deployment.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 04 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">DEEP LEARNING MODELS</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">Custom neural architectures, transfer learning, production model optimization.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 05 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">AI INTEGRATION</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">LLM integration, RAG systems, AI agents. Bring intelligence to existing products.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 06 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">DATABASE DESIGN</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">Schema architecture, query optimization, migrations. SQL & NoSQL, scaled right.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 07 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">CLOUD DEPLOYMENT</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">Docker, CI/CD, Vercel, Firebase. Ship with confidence, scale with intent.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+      <div class="glow-card p-6 group" data-hover>
+        <div class="font-mono text-xs text-[var(--ember)] mb-3">[ 08 ]</div>
+        <h3 class="font-display text-2xl mb-2 group-hover:ember-text transition">TECHNICAL CONSULTING</h3>
+        <p class="text-sm text-[var(--silver)] mb-4">Architecture reviews, tech stack selection, team mentoring, code audits.</p>
+        <i class="fa-solid fa-arrow-right text-[var(--ember)] opacity-0 group-hover:opacity-100 transition"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="relative py-24 md:py-36 px-6 md:px-10 bg-[var(--carbon)] border-t border-[var(--steel)]">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <!-- Left: heading -->
+      <div class="lg:col-span-5 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="num-tag">[ 10 / Book a Trial ]</span>
+          <span class="h-px flex-1 max-w-[120px] bg-[var(--steel)]"></span>
+        </div>
+        <h2 class="display-mega font-bold leading-[0.85]">
+          START<br>
+          THE<br>
+          <span class="ember-text">PROGRAM.</span>
+        </h2>
+        <p class="text-lg text-[var(--silver)] mt-8 max-w-md leading-snug">
+          One trial session. We'll scope your project, audit your stack, and ship the first commit. No commitment, no fluff.
+        </p>
+
+        <!-- Contact info -->
+        <div class="mt-10 space-y-4">
+          <a href="mailto:hello@wgr.dev" data-hover class="flex items-center gap-4 group">
+            <div class="w-12 h-12 border border-[var(--steel)] group-hover:border-[var(--ember)] flex items-center justify-center transition">
+              <i class="fa-solid fa-envelope text-[var(--ember)]"></i>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)]">Email</div>
+              <div class="font-head text-base">hello@wgr.dev</div>
+            </div>
+          </a>
+          <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="flex items-center gap-4 group">
+            <div class="w-12 h-12 border border-[var(--steel)] group-hover:border-[var(--ember)] flex items-center justify-center transition">
+              <i class="fa-brands fa-github text-[var(--ember)]"></i>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)]">GitHub</div>
+              <div class="font-head text-base">github.com/Whyuugl</div>
+            </div>
+          </a>
+          <a href="#" data-hover class="flex items-center gap-4 group">
+            <div class="w-12 h-12 border border-[var(--steel)] group-hover:border-[var(--ember)] flex items-center justify-center transition">
+              <i class="fa-brands fa-linkedin-in text-[var(--ember)]"></i>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)]">LinkedIn</div>
+              <div class="font-head text-base">/in/wahyu-galang</div>
+            </div>
+          </a>
+          <a href="#" data-hover class="flex items-center gap-4 group">
+            <div class="w-12 h-12 border border-[var(--steel)] group-hover:border-[var(--ember)] flex items-center justify-center transition">
+              <i class="fa-brands fa-x-twitter text-[var(--ember)]"></i>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--silver)]">X (Twitter)</div>
+              <div class="font-head text-base">@wgr_dev</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="lg:col-span-7 reveal">
+        <form id="contactForm" class="glass-strong p-8 md:p-10 space-y-6">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="form-label" for="cf-name">01 · Your Name</label>
+              <input id="cf-name" name="name" type="text" required class="form-input" placeholder="John Doe" />
+            </div>
+            <div>
+              <label class="form-label" for="cf-email">02 · Email</label>
+              <input id="cf-email" name="email" type="email" required class="form-input" placeholder="john@company.com" />
+            </div>
+          </div>
+          <div>
+            <label class="form-label" for="cf-subject">03 · Subject</label>
+            <input id="cf-subject" name="subject" type="text" required class="form-input" placeholder="Project scope, ML consulting, etc." />
+          </div>
+          <div>
+            <label class="form-label" for="cf-message">04 · Message</label>
+            <textarea id="cf-message" name="message" rows="5" required class="form-input resize-none" placeholder="Tell me about your project. Stack, timeline, goals."></textarea>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <button type="submit" data-hover class="pulse-cta inline-flex items-center gap-3 px-8 py-4 bg-[var(--ember)] text-black font-head font-semibold text-sm uppercase tracking-widest hover:bg-[var(--ember-bright)] transition">
+              <span>Book Trial Class</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button type="reset" data-hover class="inline-flex items-center gap-2 px-6 py-4 border border-[var(--steel)] hover:border-[var(--ember)] text-[var(--silver)] hover:text-white font-head text-sm uppercase tracking-widest transition">
+              Reset
+            </button>
+            <div class="ml-auto font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">
+              <i class="fa-solid fa-shield-halved text-[var(--ember)] mr-1"></i> Avg reply · 6h
+            </div>
+          </div>
+
+          <div id="formMsg" class="hidden font-head text-sm uppercase tracking-wider text-[var(--ember)] border border-[var(--ember)] px-4 py-3">
+            <i class="fa-solid fa-check-circle mr-2"></i> Message received. I'll be in touch within 6 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="relative border-t border-[var(--steel)] bg-[var(--void)]">
+  <div class="max-w-[1600px] mx-auto px-6 md:px-10 py-16">
+    <div class="grid md:grid-cols-12 gap-8 mb-12">
+      <div class="md:col-span-5">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 border border-[var(--ember)] flex items-center justify-center relative">
+            <span class="font-display text-[var(--ember)] text-2xl leading-none">W</span>
+          </div>
+          <div>
+            <div class="font-display text-xl tracking-wider">FORGE<span class="text-[var(--ember)]">//</span>WGR</div>
+            <div class="font-mono text-[10px] text-[var(--silver)] tracking-widest">CODE ATHLETE STUDIO</div>
+          </div>
+        </div>
+        <p class="text-[var(--silver)] max-w-md leading-snug">
+          Personal studio of Wahyu Galang Ramadhan Rumampuk — Full Stack Developer & Machine Learning Engineer. Building scalable web applications and intelligent AI solutions.
+        </p>
+      </div>
+      <div class="md:col-span-2">
+        <div class="num-tag mb-4">[ Navigate ]</div>
+        <ul class="space-y-2 font-head text-sm uppercase tracking-wider">
+          <li><a href="#about" data-hover class="ulink text-[var(--silver)] hover:text-white">Manifesto</a></li>
+          <li><a href="#curriculum" data-hover class="ulink text-[var(--silver)] hover:text-white">Curriculum</a></li>
+          <li><a href="#coaches" data-hover class="ulink text-[var(--silver)] hover:text-white">Experience</a></li>
+          <li><a href="#stories" data-hover class="ulink text-[var(--silver)] hover:text-white">Projects</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-2">
+        <div class="num-tag mb-4">[ More ]</div>
+        <ul class="space-y-2 font-head text-sm uppercase tracking-wider">
+          <li><a href="#stack" data-hover class="ulink text-[var(--silver)] hover:text-white">Tech Stack</a></li>
+          <li><a href="#github" data-hover class="ulink text-[var(--silver)] hover:text-white">GitHub</a></li>
+          <li><a href="#services" data-hover class="ulink text-[var(--silver)] hover:text-white">Services</a></li>
+          <li><a href="#contact" data-hover class="ulink text-[var(--silver)] hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-3">
+        <div class="num-tag mb-4">[ Connect ]</div>
+        <div class="flex flex-wrap gap-2">
+          <a href="https://github.com/Whyuugl" target="_blank" rel="noopener" data-hover class="w-11 h-11 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] flex items-center justify-center transition"><i class="fa-brands fa-github"></i></a>
+          <a href="#" data-hover class="w-11 h-11 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] flex items-center justify-center transition"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" data-hover class="w-11 h-11 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] flex items-center justify-center transition"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="mailto:hello@wgr.dev" data-hover class="w-11 h-11 border border-[var(--steel)] hover:border-[var(--ember)] hover:text-[var(--ember)] flex items-center justify-center transition"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <div class="mt-4 font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest">
+          Jakarta · ID · UTC+7<br>Available worldwide · Remote
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-[var(--steel)] pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="font-mono text-[11px] text-[var(--silver)] tracking-wider">
+        © 2026 Wahyu Galang Ramadhan Rumampuk. All rights reserved.
+      </div>
+      <div class="font-mono text-[11px] text-[var(--silver)] tracking-wider text-center">
+        Designed & Developed with <span class="text-[var(--ember)]">❤</span> using Next.js and Tailwind CSS
+      </div>
+      <div class="font-mono text-[11px] text-[var(--silver)] tracking-wider flex items-center gap-2">
+        <span class="w-1.5 h-1.5 bg-[var(--ember)] rounded-full animate-pulse"></span> SYSTEM ONLINE
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== STICKY BOTTOM BAR ===== -->
+<div id="stickyBar" class="sticky-bar glass-strong border-t border-[var(--ember)]/30">
+  <div class="max-w-[1600px] mx-auto px-6 md:px-10 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="w-10 h-10 bg-[var(--ember)] flex items-center justify-center flex-shrink-0">
+        <span class="font-display text-black text-xl leading-none">W</span>
+      </div>
+      <div class="min-w-0 hidden sm:block">
+        <div class="font-head text-sm uppercase tracking-wider truncate">Ready to forge?</div>
+        <div class="font-mono text-[10px] text-[var(--silver)] uppercase tracking-widest truncate">Trial class · No commitment</div>
+      </div>
+    </div>
+    <a href="#contact" data-hover class="pulse-cta inline-flex items-center gap-2 px-5 py-3 bg-[var(--ember)] text-black font-head font-semibold text-xs uppercase tracking-widest hover:bg-[var(--ember-bright)] transition flex-shrink-0">
+      <span>Book Trial</span>
+      <i class="fa-solid fa-arrow-right"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+/* ====== CUSTOM CURSOR ====== */
+(() => {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+  if (window.matchMedia('(max-width: 768px)').matches) return;
+
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+  });
+  const loop = () => {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);
+  };
+  loop();
+
+  document.querySelectorAll('[data-hover], a, button, input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+})();
+
+/* ====== HERO CANVAS — slow motion training reel ====== */
+(() => {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [], streaks = [], embers = [];
+  let intensity = 1;
+  let unmuted = false;
+  let raf;
+
+  const resize = () => {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+    particles = [];
+    streaks = [];
+    embers = [];
+    const count = Math.min(80, Math.floor(w / 18));
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: -Math.random() * 0.4 - 0.1,
+        r: Math.random() * 1.5 + 0.3,
+        a: Math.random() * 0.5 + 0.2
+      });
+    }
+    for (let i = 0; i < count * 0.6; i++) {
+      streaks.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        len: Math.random() * 60 + 20,
+        vy: -Math.random() * 1.2 - 0.4,
+        a: Math.random() * 0.15 + 0.05
+      });
+    }
+    for (let i = 0; i < 12; i++) {
+      embers.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vy: -Math.random() * 0.6 - 0.2,
+        vx: (Math.random() - 0.5) * 0.2,
+        r: Math.random() * 2 + 1,
+        a: Math.random() * 0.7 + 0.3,
+        life: Math.random()
+      });
+    }
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, w, h);
+
+    // Streaks (slow motion sweat lines)
+    streaks.forEach(s => {
+      ctx.strokeStyle = `rgba(255,255,255,${s.a})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x, s.y + s.len);
+      ctx.stroke();
+      s.y += s.vy * intensity;
+      s.x += Math.sin(s.y * 0.01) * 0.3;
+      if (s.y < -s.len) {
+        s.y = h + s.len;
+        s.x = Math.random() * w;
+      }
+    });
+
+    // Particles
+    particles.forEach(p => {
+      ctx.fillStyle = `rgba(200,200,200,${p.a})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, Math.max(0.1, p.r), 0, Math.PI * 2);
+      ctx.fill();
+      p.x += p.vx * intensity;
+      p.y += p.vy * intensity;
+      if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+      if (p.x < -10) p.x = w + 10;
+      if (p.x > w + 10) p.x = -10;
+    });
+
+    // Embers (orange glow)
+    embers.forEach(e => {
+      const r = Math.max(0.5, e.r);
+      const grad = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, r * 6);
+      grad.addColorStop(0, `rgba(255,90,0,${e.a})`);
+      grad.addColorStop(1, 'rgba(255,90,0,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, r * 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = `rgba(255,140,40,${e.a})`;
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, r, 0, Math.PI * 2);
+      ctx.fill();
+      e.y += e.vy * intensity;
+      e.x += e.vx * intensity;
+      e.life += 0.005;
+      if (e.y < -20 || e.life > 1) {
+        e.y = h + 20;
+        e.x = Math.random() * w;
+        e.life = 0;
+      }
+    });
+
+    raf = requestAnimationFrame(draw);
+  };
+
+  resize();
+  draw();
+  window.addEventListener('resize', resize);
+
+  // Unmute button
+  const unmuteBtn = document.getElementById('unmuteBtn');
+  const muteIcon = document.getElementById('muteIcon');
+  const unmuteIcon = document.getElementById('unmuteIcon');
+  const audioBars = document.getElementById('audioBars');
+  if (unmuteBtn) {
+    unmuteBtn.addEventListener('click', () => {
+      unmuted = !unmuted;
+      intensity = unmuted ? 1.8 : 1;
+      if (unmuted) {
+        muteIcon.classList.add('hidden');
+        muteIcon.classList.remove('flex');
+        unmuteIcon.classList.remove('hidden');
+        unmuteIcon.classList.add('flex');
+        audioBars.classList.remove('hidden');
+        audioBars.classList.add('flex');
+      } else {
+        muteIcon.classList.remove('hidden');
+        muteIcon.classList.add('flex');
+        unmuteIcon.classList.add('hidden');
+        unmuteIcon.classList.remove('flex');
+        audioBars.classList.add('hidden');
+        audioBars.classList.remove('flex');
+      }
+    });
+  }
+})();
+
+/* ====== REVEAL ON SCROLL ====== */
+(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        // Skill bars
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          const fill = bar.getAttribute('data-fill');
+          if (fill) bar.style.width = fill + '%';
+        });
+        // Don't unobserve — we want re-trigger on skill bars
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+})();
+
+/* ====== GRAIN PARALLAX ====== */
+(() => {
+  const grain = document.getElementById('grain');
+  if (!grain) return;
+  let ticking = false;
+  document.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        grain.style.transform = `translate(0, ${y * 0.12}px)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
+
+/* ====== FLIP CARDS (touch support) ====== */
+(() => {
+  document.querySelectorAll('[data-flip]').forEach(card => {
+    card.addEventListener('click', e => {
+      // Only flip on click for touch devices
+      if (window.matchMedia('(hover: none)').matches) {
+        card.classList.toggle('flipped');
+      }
+    });
+  });
+})();
+
+/* ====== MOBILE MENU ====== */
+(() => {
+  const menuBtn = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const menu = document.getElementById('mobileMenu');
+  if (!menuBtn || !menu) return;
+  const open = () => { menu.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  const close = () => { menu.classList.remove('open'); document.body.style.overflow = ''; };
+  menuBtn.addEventListener('click', open);
+  menuClose.addEventListener('click', close);
+  document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', close));
+})();
+
+/* ====== PROJECT CAROUSEL — drag/swipe with rubber band ====== */
+(() => {
+  const track = document.getElementById('storyCarousel');
+  const prev = document.getElementById('prevStory');
+  const next = document.getElementById('nextStory');
+  const progress = document.getElementById('storyProgress');
+  const indexEl = document.getElementById('storyIndex');
+  if (!track) return;
+
+  let cards = Array.from(track.children);
+  let currentIndex = 0;
+  let startX = 0, currentX = 0, isDragging = false, trackX = 0, startTrackX = 0;
+  let autoTimer;
+
+  const getCardWidth = () => {
+    if (!cards.length) return 0;
+    const card = cards[0];
+    const gap = parseInt(getComputedStyle(track).gap) || 24;
+    return card.offsetWidth + gap;
+  };
+
+  const getMaxIndex = () => {
+    const containerWidth = track.parentElement.offsetWidth;
+    const cardWidth = getCardWidth();
+    const totalWidth = cards.length * cardWidth;
+    const maxScroll = totalWidth - containerWidth;
+    return Math.max(0, Math.ceil(maxScroll / cardWidth));
+  };
+
+  const setTrackX = (x, snap = false) => {
+    if (snap) track.classList.add('snap');
+    else track.classList.remove('snap');
+    track.style.transform = `translateX(${x}px)`;
+    trackX = x;
+  };
+
+  const goTo = (idx, snap = true) => {
+    const max = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(max, idx));
+    const cardWidth = getCardWidth();
+    setTrackX(-currentIndex * cardWidth, snap);
+    updateUI();
+  };
+
+  const updateUI = () => {
+    const max = getMaxIndex();
+    const pct = max > 0 ? (currentIndex / max) * 100 : 0;
+    if (progress) progress.style.width = pct + '%';
+    if (indexEl) indexEl.textContent = String(currentIndex + 1).padStart(2, '0');
+  };
+
+  // Pointer events
+  const onDown = (e) => {
+    isDragging = true;
+    track.classList.add('dragging');
+    track.classList.remove('snap');
+    startX = e.touches ? e.touches[0].clientX : e.clientX;
+    startTrackX = trackX;
+    stopAuto();
+  };
+
+  const onMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    currentX = e.touches ? e.touches[0].clientX : e.clientX;
+    let delta = currentX - startX;
+    let newX = startTrackX + delta;
+
+    // Rubber band at edges
+    const cardWidth = getCardWidth();
+    const min = -getMaxIndex() * cardWidth;
+    if (newX > 0) {
+      newX = newX * 0.35;
+    } else if (newX < min) {
+      newX = min + (newX - min) * 0.35;
+    }
+    setTrackX(newX, false);
+  };
+
+  const onUp = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    const delta = currentX - startX;
+    const cardWidth = getCardWidth();
+    if (Math.abs(delta) > cardWidth * 0.2) {
+      if (delta < 0) goTo(currentIndex + 1);
+      else goTo(currentIndex - 1);
+    } else {
+      goTo(currentIndex);
+    }
+    startAuto();
+  };
+
+  track.addEventListener('mousedown', onDown);
+  track.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
+  track.addEventListener('touchstart', onDown, { passive: true });
+  track.addEventListener('touchmove', onMove, { passive: false });
+  track.addEventListener('touchend', onUp);
+
+  // Buttons
+  if (prev) prev.addEventListener('click', () => { goTo(currentIndex - 1); stopAuto(); startAuto(); });
+  if (next) next.addEventListener('click', () => { goTo(currentIndex + 1); stopAuto(); startAuto(); });
+
+  // Auto-advance
+  const startAuto = () => {
+    stopAuto();
+    autoTimer = setInterval(() => {
+      const max = getMaxIndex();
+      const nextIdx = currentIndex >= max ? 0 : currentIndex + 1;
+      goTo(nextIdx);
+    }, 5000);
+  };
+  const stopAuto = () => { if (autoTimer) clearInterval(autoTimer); };
+
+  track.addEventListener('mouseenter', stopAuto);
+  track.addEventListener('mouseleave', startAuto);
+
+  // Init
+  const init = () => { cards = Array.from(track.children); goTo(0, false); startAuto(); };
+  init();
+  window.addEventListener('resize', () => goTo(currentIndex, false));
+})();
+
+/* ====== STICKY BOTTOM BAR ====== */
+(() => {
+  const bar = document.getElementById('stickyBar');
+  if (!bar) return;
+  const hero = document.getElementById('hero');
+  const contact = document.getElementById('contact');
+  let inContact = false;
+
+  const contactObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { inContact = e.isIntersecting; });
+  }, { threshold: 0.1 });
+  if (contact) contactObs.observe(contact);
+
+  const heroObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const past = !e.isIntersecting;
+      if (past && !inContact) bar.classList.add('show');
+      else bar.classList.remove('show');
+    });
+  }, { threshold: 0 });
+  if (hero) heroObs.observe(hero);
+})();
+
+/* ====== CONTRIBUTION GRID ====== */
+(() => {
+  const grid = document.getElementById('contribGrid');
+  if (!grid) return;
+  const weeks = 52;
+  const days = 7;
+  // Seeded pattern with clusters
+  const levels = [
+    'rgba(20,20,20,1)',
+    'rgba(255,90,0,0.2)',
+    'rgba(255,90,0,0.4)',
+    'rgba(255,90,0,0.65)',
+    'rgba(255,90,0,0.95)'
+  ];
+  let html = '';
+  for (let d = 0; d < days; d++) {
+    html += '<div class="grid gap-[3px]">';
+    for (let w = 0; w < weeks; w++) {
+      // Bias: more activity recent weeks, with streaks
+      const recencyBias = w / weeks;
+      const r = Math.random();
+      let level;
+      if (r < 0.25 - recencyBias * 0.15) level = 0;
+      else if (r < 0.45) level = 1;
+      else if (r < 0.65) level = 2;
+      else if (r < 0.85) level = 3;
+      else level = 4;
+      // Boost recent
+      if (recencyBias > 0.7 && Math.random() < 0.3) level = Math.min(4, level + 1);
+      html += `<div class="w-[10px] h-[10px]" style="background:${levels[level]}"></div>`;
+    }
+    html += '</div>';
+  }
+  grid.innerHTML = html;
+})();
+
+/* ====== CONTACT FORM ====== */
+(() => {
+  const form = document.getElementById('contactForm');
+  const msg = document.getElementById('formMsg');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (msg) {
+      msg.classList.remove('hidden');
+      msg.classList.add('block');
+    }
+    form.reset();
+    setTimeout(() => {
+      if (msg) {
+        msg.classList.add('hidden');
+        msg.classList.remove('block');
+      }
+    }, 5000);
+  });
+})();
+
+/* ====== SMOOTH SCROLL OFFSET ====== */
+(() => {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          const y = el.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
