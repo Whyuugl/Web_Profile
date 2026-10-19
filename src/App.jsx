@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import heroImage from './assets/hero.png'
 import { useReveal } from './hooks/useReveal'
 import './App.css'
@@ -217,9 +218,14 @@ function App() {
         </section>
 
         <section className="section reveal" id="work">
-          <header className="section-header">
-            <span className="section-tag">01 / Work</span>
-            <h2>Featured projects</h2>
+          <header className="section-header section-header-split">
+            <div>
+              <span className="section-tag">01 / Work</span>
+              <h2>Featured projects</h2>
+            </div>
+            <Link to="/portfolio" className="btn btn-secondary see-more-btn">
+              See more works →
+            </Link>
           </header>
           <div className="project-list reveal-stagger">
             {projects.map(({ num, name, description, impact, stack, href }) => (

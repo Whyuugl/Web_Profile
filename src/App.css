@@ -465,6 +465,16 @@
   line-height: 1.7;
 }
 
+.see-more-btn {
+  justify-self: end;
+}
+
+@media (max-width: 860px) {
+  .see-more-btn {
+    justify-self: start;
+  }
+}
+
 .project-list {
   display: grid;
   gap: 12px;
