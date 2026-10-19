@@ -1,0 +1,118 @@
+.portfolio-main {
+  padding: 110px 0 48px;
+}
+
+.portfolio-header {
+  margin-bottom: 48px;
+}
+
+.portfolio-header h1 {
+  margin: 16px 0 8px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.portfolio-header p {
+  color: var(--text-dim);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+
+.back-link:hover {
+  transform: translateX(-4px);
+}
+
+.loading, .error {
+  color: var(--text-dim);
+  text-align: center;
+  padding: 48px;
+}
+
+.error {
+  color: var(--warn);
+}
+
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.repo-card {
+  display: block;
+  padding: 24px;
+  animation: cardIn 0.55s var(--ease) backwards;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+}
+
+.repo-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(71, 255, 198, 0.38);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.repo-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.repo-num {
+  color: var(--warn);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.repo-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.repo-card p {
+  margin: 0 0 16px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.repo-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.repo-lang {
+  color: var(--accent);
+}
+
+.repo-stars, .repo-forks {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .repo-card {
+    animation: none;
+  }
+}
